@@ -1,0 +1,35 @@
+services:
+  mysql:
+    image: mysql:8.3.0
+    container_name: mysql-container2
+    environment:
+      MYSQL_ROOT_PASSWORD: 22373444
+      MYSQL_DATABASE: drugstore
+    ports:
+      - "3308:3306"
+    networks:
+      - mynetwork
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    image: drug_img
+    container_name: mydrugstore
+    depends_on:
+      - mysql
+    ports:
+      - "8083:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container2:3306/drugstore?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 22373444
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    name: hospital_mynetwork
+    driver: bridge
+
+volumes:
+  mysql_data:
