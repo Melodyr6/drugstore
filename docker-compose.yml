@@ -1,10 +1,10 @@
 services:
   mysql:
     image: mysql:8.3.0
-    container_name: mysql-container1
+    container_name: mysql-container2
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD : "true"
-      MYSQL_DATABASE: hospital
+      MYSQL_DATABASE: drugstore
     ports:
       - "3307:3306"
     networks:
@@ -12,14 +12,14 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
   app:
-    image: hospital:latest
-    container_name: hospital-container
+    image: drugstore:latest
+    container_name: drugstore-container
     depends_on:
       - mysql
     ports:
-      - "8082:8082"
+      - "8083:8083"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container1:3306/hospital?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-container2:3306/drugstore?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: root
     networks:
       - mynetwork
