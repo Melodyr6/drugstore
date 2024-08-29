@@ -123,7 +123,7 @@ public class StoreController {
 //添加一条药品入库
     @PostMapping("adddrugs")
     @ResponseBody
-    public Integer adddrugs(Drugstore drugstore,Record record) {
+    public Integer adddrugs(Drugstore drugstore,com.aaa.entity.Record record) {
         System.out.print("查询方法");
         Integer updrugnumber=0;
         Integer adddrugstore=0;
@@ -231,7 +231,7 @@ public class StoreController {
     //删除过期的药
     @PostMapping("delguoqidurg")
     @ResponseBody
-    public Integer delguoqidurg(Integer rugstoreId,Record record) {
+    public Integer delguoqidurg(Integer rugstoreId,com.aaa.entity.Record record) {
         System.out.print("进入删除");
         int delguoqidurg = storeService.delguoqidurg(rugstoreId);//删除此条数据
         if(delguoqidurg==1){//如果删除此条 则添加到记录表
