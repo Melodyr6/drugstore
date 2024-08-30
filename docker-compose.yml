@@ -25,7 +25,8 @@ services:
       - mynetwork
 networks:
   mynetwork:
-    external: true
+    name: hospital_mynetwork
+    driver: bridge
 
 volumes:
   mysql_data:
